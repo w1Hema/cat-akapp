@@ -211,7 +211,7 @@ class _DeveloperScreenState extends State<DeveloperScreen> with SingleTickerProv
                   ).animate().fadeIn(delay: 300.ms),
                   const SizedBox(height: 15),
 
-                  _buildTechRow(isDark, "المنصة", "Flutter (Dart)", FontAwesomeIcons.flutter, const Color(0xFF02569B), 400),
+                  _buildTechRow(isDark, "المنصة", "Flutter (Dart)", Icons.flutter_dash, const Color(0xFF02569B), 400),
                   _buildTechRow(isDark, "الإصدار", "1.0.0+1", FontAwesomeIcons.codeBranch, const Color(0xFF25D366), 450),
                   _buildTechRow(isDark, "SDK", "Flutter 3.11+", FontAwesomeIcons.cubes, const Color(0xFF00C6FF), 500),
                   _buildTechRow(isDark, "حالة البناء", "مستقر ✅", FontAwesomeIcons.circleCheck, const Color(0xFF4CAF50), 550),
