@@ -8,30 +8,29 @@ echo.
 
 cd /d "C:\Users\Hema\Desktop\my-site\flutter_portfolio\cyber_cv_app"
 
-:: إعداد هوية وهمية أو سريعة لبرنامج Git حتى لا يعترض
 git config user.email "eng.ibrahim@cybercv.com"
 git config user.name "Ibrahim Fathy"
 
-IF EXIST ".git" goto :AskUrlIfMissing
-
-echo [!] المشروع غير مرتبط بـ GitHub حالياً. جاري إعداده لأول مرة...
-git init
-git branch -M main
-
-:AskUrlIfMissing
-:: التحقق مما إذا كان الرابط موجوداً بالفعل
-git remote -v | find "origin" >nul
-if %errorlevel% equ 0 goto :DoPush
+:: تنظيف الرابط الخاطئ الذي تم إدخاله في المرة السابقة
+git remote remove origin 2>nul
 
 :AskUrl
 echo.
-echo الرجاء الذهاب إلى موقع GitHub ونسخ رابط المستودع الخاص بك (Repository URL)
-echo (الرابط يكون بهذا الشكل: https://github.com/YourName/cyber_cv.git)
+echo [!] تنبيه: لقد قمت بإدخال اسمك (w1Hemaa) فقط في المرة السابقة وهذا خطأ.
+echo الرجاء نسخ الرابط الكاااااامل للمستودع من شريط المتصفح من الأعلى.
+echo يجب أن يبدأ الرابط بـ https://github.com
+echo مثال صحيح: https://github.com/w1Hemaa/cyber_cv_app.git
 echo.
-set /p REPO_URL="ألصق الرابط هنا واضغط Enter: "
+set /p REPO_URL="ألصق الرابط الكاااامل هنا واضغط Enter: "
 
 if "!REPO_URL!"=="" (
-    echo [خطأ] لم تقم بإدخال الرابط! حاول مرة أخرى...
+    echo [خطأ] لم تقم بإدخال شيء! حاول مرة أخرى...
+    goto :AskUrl
+)
+
+echo !REPO_URL! | findstr /i "https://github.com" >nul
+if errorlevel 1 (
+    echo [خطأ] الرابط غير صحيح! يجب أن يبدأ بـ https://github.com
     goto :AskUrl
 )
 
@@ -52,7 +51,6 @@ git push -u origin main --force
 
 echo.
 echo ========================================================
-echo ✅ إذا لم يظهر لك أخطاء باللون الأحمر، فقد تمت عملية الرفع بنجاح!
-echo يمكنك الآن الذهاب إلى Codemagic للبدء
+echo ✅ تمت عملية الرفع بنجاح! يمكنك الآن الذهاب إلى Codemagic
 echo ========================================================
 pause
