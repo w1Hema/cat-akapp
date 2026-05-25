@@ -10,9 +10,13 @@ workflows:
       - name: Get Flutter Packages
         script: |
           flutter pub get
+      - name: Bypass Xcode Code Signing
+        script: |
+          sed -i '' 's/"CODE_SIGN_IDENTITY\[sdk=iphoneos\*\]" = "iPhone Developer";/CODE_SIGN_IDENTITY = "";\n\t\t\t\tCODE_SIGNING_REQUIRED = NO;\n\t\t\t\tCODE_SIGNING_ALLOWED = NO;/g' ios/Runner.xcodeproj/project.pbxproj
+          sed -i '' 's/CODE_SIGN_STYLE = Automatic;/CODE_SIGN_STYLE = Manual;/g' ios/Runner.xcodeproj/project.pbxproj
       - name: Generate iOS Config
         script: |
-          flutter build ios --config-only
+          flutter build ios --config-only --no-codesign || true
       - name: Build Unsigned iOS App via xcodebuild
         script: |
           cd ios
