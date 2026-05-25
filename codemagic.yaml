@@ -10,14 +10,18 @@ workflows:
       - name: Get Flutter Packages
         script: |
           flutter pub get
-      - name: Build Unsigned iOS App
+      - name: Generate iOS Config
         script: |
-          flutter build ios --release --no-codesign
+          flutter build ios --config-only
+      - name: Build Unsigned iOS App via xcodebuild
+        script: |
+          cd ios
+          xcodebuild build -workspace Runner.xcworkspace -scheme Runner -configuration Release -sdk iphoneos CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" -quiet
       - name: Create Unsigned IPA for Sideloading
         script: |
           mkdir -p build/ios/iphoneos/Payload
-          cp -r build/ios/iphoneos/Runner.app build/ios/iphoneos/Payload/
+          cp -r ios/build/Release-iphoneos/Runner.app build/ios/iphoneos/Payload/
           cd build/ios/iphoneos
-          zip -r cyber_cv_unsigned.ipa Payload
+          zip -qr cyber_cv_unsigned.ipa Payload
     artifacts:
       - build/ios/iphoneos/cyber_cv_unsigned.ipa
