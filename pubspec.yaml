@@ -9,19 +9,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8
-  flutter_animate: ^4.5.2
-  font_awesome_flutter: ^10.8.0
-  google_fonts: ^6.2.1
-  url_launcher: ^6.3.1
-  shared_preferences: ^2.3.4
-  animated_text_kit: ^4.2.2
-  local_auth: ^2.2.0
+  cupertino_icons: any
+  flutter_animate: any
+  font_awesome_flutter: any
+  google_fonts: any
+  url_launcher: any
+  shared_preferences: any
+  animated_text_kit: any
+  local_auth: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
-  flutter_launcher_icons: ^0.13.1
+  flutter_lints: any
+  flutter_launcher_icons: any
 
 flutter:
   uses-material-design: true
