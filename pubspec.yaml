@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: any
   flutter_animate: any
-  font_awesome_flutter: any
+  font_awesome_flutter: 10.7.0
   google_fonts: any
   url_launcher: any
   shared_preferences: any
